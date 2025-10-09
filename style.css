@@ -1,0 +1,256 @@
+/* ======================================= */
+/* ESTILOS GERAIS E LAYOUT DA PÁGINA */
+/* ======================================= */
+body {
+    font-family: Arial, sans-serif;
+    padding: 0; 
+    margin: 0;
+    background-color: #d6dbda;
+}
+
+/* Barra de topo azul (RESERVA DE LABORATÓRIO...) */
+#header-topo {
+    background-color: #003366; /* Azul escuro */
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+    margin-bottom: 20px;
+    border-bottom: 5px solid #FFD700; /* Linha amarela */
+}
+#header-topo h1 {
+    margin: 0;
+    font-size: 1.8em;
+}
+
+/* Container principal que centraliza o calendário */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Alinha o calendário e o detalhe lado a lado */
+#calendario-layout {
+    display: flex;
+    gap: 20px; 
+    margin-top: 20px;
+}
+
+/* O container do calendário (Grade de dias) */
+#calendario-grid-container {
+    flex-grow: 1; 
+    min-width: 450px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Linha dos dias da semana (Dom, Seg, Ter...) */
+#dias-da-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #003366; /* Fundo azul escuro */
+    color: white; /* Texto branco */
+    border-radius: 8px 8px 0 0;
+}
+
+/* Grade dos dias do mês (1, 2, 3...) */
+#dias-do-mes {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    background-color: white; /* Fundo branco para dias de semana */
+}
+
+/* Estilo de cada célula de dia */
+.dia-celula {
+    border: 1px solid #eee;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.2em;
+    min-height: 80px; 
+    cursor: pointer;
+    transition: background-color 0.2s;
+    /* Cor padrão para dias de semana */
+    color: #0056b3; /* Número Azul Escuro */
+}
+
+.dia-celula.vazio {
+    background-color: #f9f9f9;
+    cursor: default;
+    color: #ccc;
+}
+
+/* 🟥 SÁBADO e DOMINGO */
+.dia-celula.fim-semana {
+    background-color: #020303; /* Fundo azul escuro */
+    color: #ebe9e3; /* Número Amarelo */
+    font-weight: bold;
+}
+
+/* 🟡 FERIADO - Fundo Amarelo, Borda Azul Escuro */
+.dia-celula.feriado {
+    background-color: #ffffff; /* Fundo Amarelo */
+    color: #bb0909; /* Número Azul Escuro */
+    font-weight: bold;
+    cursor: default; /* Bloqueia o cursor */
+    /* 🆕 Borda Azul Escuro */
+    border: 2px solid #003366;
+}
+
+.dia-celula:not(.vazio):not(.fim-semana):not(.feriado):hover {
+    background-color: #e6e6e6; 
+}
+
+/* REMOÇÃO DO QUADRADO AZUL INDESEJADO (foco/outline) */
+.dia-celula:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Estilos de seleção */
+.dia-celula.selecionado {
+    border: 2px solid #FFD700; /* Borda amarela */
+    background-color: #fffacd;
+}
+
+/* Estilo para a caixa de controle de mês (Seletor) */
+#controle-mes {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* ✅ CORREÇÃO: Estilo do seletor de mês */
+#seletor-mes {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    border: 1px solid #003366; 
+    font-weight: bold;
+    background-color: white; /* Fundo branco */
+    color: #003366; /* Texto azul escuro */
+}
+
+/* ======================================= */
+/* DETALHE DE HORÁRIOS (#horarios-detalhe) */
+/* ======================================= */
+#horarios-detalhe {
+    flex-grow: 2; 
+    min-width: 400px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.horario {
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    font-size: 0.95em;
+    border: 1px solid transparent;
+}
+
+/* 🟩 HORÁRIO LIVRE - Clicável */
+.horario.livre {
+    background-color: #e6ffe6; 
+    color: #006600;
+    border: 1px solid #006600; 
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.horario.livre:hover {
+    background-color: #ccffcc; 
+}
+
+/* 🟥 BLOQUEIO TÉCNICO E FERIADO */
+.horario.bloqueio-tecnico {
+    background-color: #ffcccc; 
+    color: #cc0000;
+    font-weight: bold;
+}
+
+/* 🟦 HORÁRIO JÁ AGENDADO */
+.horario.agendado {
+    background-color: #cce0ff;
+    color: #0056b3;
+    font-weight: 500;
+}
+
+/* ⬜ INTERVALO (Recreio/Almoço) */
+.horario.intervalo {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* ======================================= */
+/* ESTILO DO MODAL DE AGENDAMENTO */
+/* ======================================= */
+#modal-reserva {
+    display: none; 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    background-color: white; 
+    border: 1px solid #003366; 
+    box-shadow: 0 5px 20px rgba(0, 51, 102, 0.4); 
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+/* ESTILO PARA OS CAMPOS DE TEXTO (INPUTS) */
+#modal-reserva input[type="text"] {
+    width: 90%; 
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); 
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Efeito de FOCO nos inputs */
+#modal-reserva input[type="text"]:focus {
+    border-color: #0056b3; 
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); 
+}
+
+#modal-reserva button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+/* Botão Confirmar */
+#modal-reserva button[type="submit"] {
+    background-color: #0056b3;
+    color: white;
+    box-shadow: 0 3px 5px rgba(0, 51, 102, 0.3); 
+}
+
+#modal-reserva button[type="submit"]:hover {
+    background-color: #004080;
+}
+
+/* Botão Cancelar */
+#modal-reserva button[type="button"] {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+#modal-reserva button[type="button"]:hover {
+    background-color: #e0e0e0;
+}

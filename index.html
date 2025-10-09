@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle | Reserva Laboratório de Informática</title>
+     <link rel="shortcut icon" type="image/x-icon" href="./imagens/Icone.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header id="header-topo">
+        <h1>CONTROLE | RESERVA LABORATÓRIO DE INFORMÁTICA</h1>
+    </header>
+    
+    <main>
+        <div id="controle-mes">
+            <select id="seletor-mes" onchange="trocarMes(this.value)"></select>
+        </div>
+
+        <div id="calendario-layout">
+            <div id="calendario-grid-container">
+                <div id="dias-da-semana">
+                    <div>Dom</div>
+                    <div>Seg</div>
+                    <div>Ter</div>
+                    <div>Qua</div>
+                    <div>Qui</div>
+                    <div>Sex</div>
+                    <div>Sáb</div>
+                </div>
+                <div id="dias-do-mes"></div> 
+            </div>
+
+            <div id="horarios-detalhe">
+                <h3>Selecione um dia no calendário.</h3>
+                <p>Clique em um dia para ver a disponibilidade de horários.</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    
+    <div id="modal-reserva">
+        <h3>Agendar Laboratório</h3>
+        <p>Horário: <span id="info-horario"></span></p>
+        <form id="form-reserva">
+            <label for="nome-professor">Professor(a):</label>
+            <input type="text" id="nome-professor" required><br>
+
+            <label for="nome-turma">Turma:</label>
+            <input type="text" id="nome-turma" required><br>
+
+            <div style="margin-top: 15px;">
+                <button type="submit">Confirmar Agendamento</button>
+                <button type="button" onclick="document.getElementById('modal-reserva').style.display = 'none'">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
